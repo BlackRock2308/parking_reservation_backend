@@ -4,10 +4,8 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import net.bytebuddy.implementation.bind.annotation.Default;
-import org.hibernate.annotations.ColumnDefault;
-import org.springframework.beans.factory.annotation.Value;
-import org.springframework.boot.context.properties.bind.DefaultValue;
+import org.hibernate.annotations.DynamicInsert;
+
 
 import javax.persistence.*;
 import java.io.Serializable;
@@ -16,16 +14,19 @@ import java.io.Serializable;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
+@DynamicInsert
 public class ParkingPlace implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
     private String clientFullName;
+    @Column(unique = true)
     private String matriculeCar;
     private String phoneNumber;
+    @Column(unique = true)
     private String parkingNumber;
-    @Value(value = "Pending")
+    @Column(columnDefinition = "varchar(255) default 'Pending'")
     private String status;
 
 

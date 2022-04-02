@@ -11,7 +11,8 @@ public interface IParkingPlaceService {
 
     public Iterable<ParkingPlace> getAllParkingPlaces();
     public ParkingPlace saveParkingPlace(ParkingPlace parkingPlace);
-    public Optional<ParkingPlace> getParkingPlace(String id);
-    public ParkingPlace updateParkingPlace(ParkingPlace place);
+    public Optional<ParkingPlace> getParkingPlace(Integer id);
+    public ParkingPlace updateParkingPlace(ParkingPlace parkingPlace);
+
 
 }

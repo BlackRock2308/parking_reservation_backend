@@ -33,7 +33,7 @@ public class ParkingPlaceController {
     //************************ get a Parking place by ID ****************************************
 
     @GetMapping("/{id}")
-    public ResponseEntity<ParkingPlace> getParkingPlaceById(@PathVariable String id) {
+    public ResponseEntity<ParkingPlace> getParkingPlaceById(@PathVariable Integer id) {
         Optional<ParkingPlace> optionalReport= parkingPlaceService.getParkingPlace(id);
         if(!optionalReport.isPresent()){
             return ResponseEntity.unprocessableEntity().build();
@@ -53,7 +53,7 @@ public class ParkingPlaceController {
 
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<ParkingPlace> deleteParkingPlace(@PathVariable String id){
+    public ResponseEntity<ParkingPlace> deleteParkingPlace(@PathVariable Integer id){
         Optional<ParkingPlace> optionalParkingPlace= parkingPlaceService.getParkingPlace(id);
         if(!optionalParkingPlace.isPresent()){
             return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
@@ -65,10 +65,15 @@ public class ParkingPlaceController {
 
 
     @PutMapping
-    public ResponseEntity<ParkingPlace> updateParkingPlace(@RequestBody ParkingPlace place) {
+    public ResponseEntity<ParkingPlace> updateParkingPlace1(@RequestBody ParkingPlace place) {
 
         ParkingPlace updateParkingPlace=parkingPlaceService.updateParkingPlace(place);
         return new ResponseEntity<>(updateParkingPlace,HttpStatus.OK);
     }
 
+    @PutMapping("/update")
+    public ResponseEntity<ParkingPlace> updatePArkingPlace(@RequestBody ParkingPlace parkingPlace) {
+        ParkingPlace updateParkingPlace = parkingPlaceService.updateParkingPlace(parkingPlace);
+        return new ResponseEntity<>(updateParkingPlace, HttpStatus.OK);
+    }
 }

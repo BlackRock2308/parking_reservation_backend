@@ -5,10 +5,12 @@ import org.springframework.stereotype.Service;
 import sn.ept.dic2.git.imageprocessing.parkingapp.models.ParkingPlace;
 import sn.ept.dic2.git.imageprocessing.parkingapp.repositories.ParkingPlaceRepository;
 
+import javax.transaction.Transactional;
 import java.util.Optional;
 
 @AllArgsConstructor
 @Service("parkingPlaceService")
+@Transactional
 public class ParkingPlaceServiceImpl implements IParkingPlaceService{
 
     private final ParkingPlaceRepository parkingRepository;
@@ -23,7 +25,7 @@ public class ParkingPlaceServiceImpl implements IParkingPlaceService{
     }
 
     @Override
-    public Optional<ParkingPlace> getParkingPlace(String id) {
+    public Optional<ParkingPlace> getParkingPlace(Integer id) {
         return parkingRepository.findById(id);
     }
 
@@ -37,5 +39,14 @@ public class ParkingPlaceServiceImpl implements IParkingPlaceService{
         return parkingRepository.save(existingParkingPlace);
 
     }
+
+/*
+    @Override
+    public ParkingPlace updateParkingPlace(ParkingPlace parkingPlace) {
+        return parkingRepository.save(parkingPlace);
+    }
+
+ */
+
 
 }
